@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAMPUS | Book Borrow & Swap</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="container">
+
+            <!-- ========== NAVBAR ========== -->
+            <header class="navbar">
+                <div class="nav-left">
+                    <div class="logo">
+                        <span>📘</span>
+                    </div>
+                    <div>
+                        <div class="brand-text-main">CAMPUS</div>
+                        <div class="brand-text-sub">Book Borrow & Swap</div>
+                    </div>
+                </div>
+
+                <div class="nav-center">
+                    <a href="/index.html" class="nav-link active">Home</a>
+                </div>
+
+                <div class="nav-right">
+                    <button class="nav-cta" id="btnAddBook">+ Add Book</button>
+                    <div style="position:relative;">
+                    <button class="nav-icon-btn" title="Notifications" id="btnNotifications">🔔</button>
+                    </div>
+                    <button class="nav-icon-btn" id="btnProfile" title="Profile">👤</button>
+                    <button class="nav-cta" id="btnAuth" title="Sign in">Sign in</button>
+                </div>
+            </header>
+
+
+
+            <!-- ========== HERO ========== -->
+            <section class="hero">
+                <div class="hero-main">
+                    <div class="hero-pill">
+                        <div class="hero-pill-icon">🎓</div>
+                        <span>On-campus book sharing platform</span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        Discover books by department.
+                        <br />Borrow, lend and swap with your campus.
+                    </h1>
+
+                    <div class="hero-highlight">
+                        <span class="hero-highlight-dot"></span>
+                        <span>All books are shared by students in your university.</span>
+                    </div>
+
+                    <p class="hero-sub">
+                        Quickly see the most popular books in Software Engineering, Medicine,
+                        Law, Psychology, Business, Architecture and more. Only students with a
+                        university e-mail can access this platform.
+                    </p>
+
+                    <div class="hero-actions">
+                        <button class="hero-btn primary" id="btnBrowse">
+                            <span class="hero-btn-icon">⬇</span>
+                            Browse books to borrow
+                        </button>
+                        <button class="hero-btn secondary" id="btnSwap">
+                            <span class="hero-btn-icon">⇄</span>
+                            List a book to swap
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <div class="search-card">
+                        <div class="search-label">Search by department or book</div>
+                        <div class="search-row" id="searchRow">
+                            <span class="search-icon">🔍</span>
+                            <input type="text"
+                                   class="search-input"
+                                   id="searchInput"
+                                   placeholder="e.g. 'Software Engineering', 'Criminal Law', 'IELTS'" />
+                            <button id="btnSearch" style="padding: 4px 12px; border-radius: 999px; border: none; background: linear-gradient(120deg, #38bdf8, #22c55e); color: #020617; font-size: 11px; font-weight: 600; cursor: pointer; white-space: nowrap;">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== MAIN CONTENT ========== -->
+            <!-- id eklendi — JS ile dinamik değişecek -->
+            <!-- ========== MAIN CONTENT ========== -->
+            <section class="section-header">
+                <div>
+                    <h2 id="sectionTitle">Popular in your campus</h2>
+                    <p id="sectionSubtitle">Highlighted by department.</p>
+                </div>
+            </section>
+
+            <!-- AI ÖNERİ BÖLÜMÜ — başlangıçta gizli -->
+            <section class="category" id="recommendedSection" style="display:none;">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-dot" style="background:#38bdf8;"></div>
+                        <div>
+                            <div class="category-name" id="recommendedTitle">Recommended for You</div>
+                            <div class="category-sub" id="recommendedSubtitle">
+                                AI-powered suggestions based on your search.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-list" id="recommendedList"></div>
+            </section>
+            <!-- Engineering Faculty -->
+            <section class="category" data-category="Engineering Faculty">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-dot"></div>
+                        <div>
+                            <div class="category-name">Engineering Faculty</div>
+                            <div class="category-sub">Computer Engineering, Electrical & Electronics Engineering, Mechanical Engineering, Civil Engineering, Industrial Engineering, Environmental Engineering.</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="book-list" id="list-engineering"></div>
+            </section>
+
+            <!-- Faculty of Science & Letters -->
+            <section class="category" data-category="Faculty of Science & Letters">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-dot"></div>
+                        <div>
+                            <div class="category-name">Faculty of Science & Letters</div>
+                            <div class="category-sub">Mathematics, Physics, Chemistry, Biology, Turkish Language & Literature, History, Philosophy.</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="book-list" id="list-letters"></div>
+            </section>
+
+            <!-- Medical Faculty -->
+            <section class="category" data-category="Medical Faculty">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-dot"></div>
+                        <div>
+                            <div class="category-name">Medical Faculty</div>
+                            <div class="category-sub">Medicine (general), Clinical Sciences tags, Basic Medical Sciences tags</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="book-list" id="list-medicine"></div>
+            </section>
+
+            <!-- Pharmacy -->
+            <section class="category" data-category="Pharmacy Faculty">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-dot"></div>
+                        <div>
+                            <div class="category-name">Pharmacy Faculty</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="book-list" id="list-pharmacy"></div>
+            </section>
+
+            <!-- Dentistry Faculty -->
+            <section class="category" data-category="Dentistry Faculty">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-dot"></div>
+                        <div>
+                            <div class="category-name">Dentistry Faculty</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="book-list" id="list-dentistry"></div>
+            </section>
+
+            <!-- Health Science Faculty -->
+            <section class="category" data-category="Health Sciences Faculty">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-dot"></div>
+                        <div>
+                            <div class="category-name">Health Sciences Faculty</div>
+                            <div class="category-sub">Nursing, Physiotherapy & Rehabilitation, Nutrition & Dietetics.</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="book-list" id="list-Health"></div>
+            </section>
+
+            <!-- Law Faculty -->
+            <section class="category" data-category="Law Faculty">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-dot"></div>
+                        <div>
+                            <div class="category-name">Law Faculty</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="book-list" id="list-law"></div>
+            </section>
+
+            <!-- Fine Arts / Music / Conservatory -->
+            <section class="category" data-category="Fine Arts / Music / Conservatory">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-dot"></div>
+                        <div>
+                            <div class="category-name">Fine Arts / Music / Conservatory</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="book-list" id="list-arts"></div>
+            </section>
+
+            <!-- Psychology -->
+            <section class="category" data-category="Psychology">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-dot"></div>
+                        <div>
+                            <div class="category-name">Psychology</div>
+                            <div class="category-sub">Cognitive, clinical and social psychology.</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="book-list" id="list-psychology"></div>
+            </section>
+
+            <!-- Education Faculty -->
+            <section class="category" data-category="Education Faculty">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-dot"></div>
+                        <div>
+                            <div class="category-name">Education Faculty</div>
+                            <div class="category-sub">Elementary Teaching, Psychological Counseling & Guidance, Mathematics Education.</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="book-list" id="list-education"></div>
+            </section>
+
+            <!-- Business & Economics -->
+            <section class="category" data-category="Economics / Business / Management Faculty">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-dot"></div>
+                        <div>
+                            <div class="category-name">Economics / Business / Management Faculty</div>
+                            <div class="category-sub">Business Administration, Economics, International Relations, Public Administration, Finance</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="book-list" id="list-business"></div>
+            </section>
+
+            <!-- Communication Faculty -->
+            <section class="category" data-category="Communication Faculty">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-dot"></div>
+                        <div>
+                            <div class="category-name">Communication Faculty</div>
+                            <div class="category-sub">Journalism, Public Relations, Radio Television & Cinema</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="book-list" id="list-communication"></div>
+            </section>
+
+            <!-- Architecture & Design -->
+            <section class="category" data-category="Architecture & Design Faculty">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-dot"></div>
+                        <div>
+                            <div class="category-name">Architecture & Design Faculty</div>
+                            <div class="category-sub">Studio projects, drawing, design theory.</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="book-list" id="list-architecture"></div>
+            </section>
+
+            <!-- English Prep & Language Exams -->
+            <section class="category" data-category="English & Language Exams">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-dot"></div>
+                        <div>
+                            <div class="category-name">English Prep & Language Exams</div>
+                            <div class="category-sub">Grammar, TOEFL, IELTS and academic writing.</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="book-list" id="list-english"></div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="footer">
+                <div>© 2025 Campus Books — internal university book borrow & swap platform.</div>
+                <div class="footer-links">
+                    <a href="#">Help</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- ADD BOOK MODAL -->
+    <div class="add-book-overlay">
+        <div class="add-book-modal">
+            <div class="add-book-header">
+                <div class="add-book-title">
+                    <span class="add-book-icon">＋</span>
+                    <div>
+                        <h2>Add Book</h2>
+                        <p>Add a book that you want to share on campus.</p>
+                    </div>
+                </div>
+                <button class="add-book-close" id="btnCloseAddBook">✕</button>
+            </div>
+
+            <div class="add-book-body">
+                <div class="add-book-left">
+                    <input type="file" id="imageFile" class="image-file-input" accept="image/*" />
+                    <label for="imageFile" id="imagePreview" class="add-book-image-preview">
+                        <span class="add-book-image-placeholder">
+                            <span class="add-book-image-icon">📚</span>
+                            <span class="add-book-image-text">Click to upload cover</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="add-book-right">
+                    <form id="addBookForm" class="add-book-form">
+                        <div class="add-book-grid">
+                            <div class="field-group">
+                                <label for="title">Book Title <span class="required">*</span></label>
+                                <input type="text" id="title" class="add-book-input" placeholder="e.g. Clean Code" required />
+                            </div>
+                            <div class="field-group">
+                                <label for="author">Author <span class="required">*</span></label>
+                                <input type="text" id="author" class="add-book-input" placeholder="e.g. Robert C. Martin" required />
+                            </div>
+                            <div class="field-group">
+                                <label for="category">Category <span class="required">*</span></label>
+                                <select id="category" class="add-book-input" required>
+                                    <option value="">Select a category</option>
+                                    <option>Engineering Faculty</option>
+                                    <option>Faculty of Science & Letters</option>
+                                    <option>Medical Faculty</option>
+                                    <option>Pharmacy Faculty</option>
+                                    <option>Dentistry Faculty</option>
+                                    <option>Health Sciences Faculty</option>
+                                    <option>Law Faculty</option>
+                                    <option>Fine Arts / Music / Conservatory</option>
+                                    <option>Psychology</option>
+                                    <option>Education Faculty</option>
+                                    <option>Economics / Business / Management Faculty</option>
+                                    <option>Communication Faculty</option>
+                                    <option>Architecture & Design Faculty</option>
+                                    <option>English & Language Exams</option>
+                                </select>
+                            </div>
+                            <div class="field-group full">
+                                <label for="description">Description</label>
+                                <textarea id="description" class="add-book-input add-book-textarea" placeholder="Write a short description about the book..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="availability">
+                            <div class="availability-label">Availability options <span class="required">*</span></div>
+                            <label class="checkbox-row">
+                                <input type="checkbox" id="availBorrow" checked />
+                                <span>Can be borrowed</span>
+                            </label>
+                            <label class="checkbox-row">
+                                <input type="checkbox" id="availSwap" />
+                                <span>Can be swapped</span>
+                            </label>
+                            <p class="availability-hint">* Select at least one option</p>
+                        </div>
+
+                        <div class="add-book-footer">
+                            <button type="button" class="btn-secondary" id="btnCancelAddBook">Cancel</button>
+                            <button type="submit" class="btn-primary">＋ Add Book</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOK DETAIL MODAL -->
+    <div class="book-detail-overlay" id="bookDetailOverlay" aria-hidden="true">
+        <div class="book-detail-modal" role="dialog" aria-modal="true" aria-labelledby="bookDetailTitle">
+            <button class="book-detail-close" id="bookDetailClose" aria-label="Close">✕</button>
+            <div class="book-detail-grid">
+                <div class="book-detail-left">
+                    <div id="bookDetailCover" class="book-detail-cover" style="background-image:none;"></div>
+                </div>
+                <div class="book-detail-right">
+                    <h2 id="bookDetailTitle" class="book-detail-title">Book title</h2>
+                    <div class="book-detail-sub">
+                        <span id="bookDetailAuthor" class="muted">by Author</span>
+                        <span class="dot">•</span>
+                        <span id="bookDetailTag" class="tag">Tag</span>
+                    </div>
+                    <div class="book-detail-meta">
+                        <div><strong>Owner</strong><div id="bookDetailOwner" class="muted">Owner Name</div></div>
+                        <div><strong>Status</strong><div id="bookDetailStatus" class="status status-available">Available</div></div>
+                        <div><strong>Category</strong><div id="bookDetailCategory" class="muted">Category</div></div>
+                    </div>
+                    <div class="book-detail-desc">
+                        <h4>Description</h4>
+                        <p id="bookDetailDescription" class="muted">Short description about the book.</p>
+                    </div>
+                    <div class="book-detail-actions">
+                        <button id="btnRequestBorrow" class="btn-primary">Request to borrow</button>
+                        <button id="btnRequestSwap" class="btn-secondary">Request to swap</button>
+                    </div>
+                    <div class="detail-message">
+                        <label for="requestMessage">Message:</label>
+                        <textarea id="requestMessage" placeholder="Write a message..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External JS -->
+    <script src="/js/notifications.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>

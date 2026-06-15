@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CAMPUS | Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/profile.css" />
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="container">
+
+            <!-- ========== NAVBAR ========== -->
+            <header class="navbar">
+                <div class="nav-left">
+                    <div class="logo">📘</div>
+                    <div>
+                        <div class="brand-text-main">CAMPUS</div>
+                        <div class="brand-text-sub">Book Borrow & Swap</div>
+                    </div>
+                </div>
+                <div class="nav-center">
+                    <a href="/index.html" class="nav-link active">Home</a>
+                </div>
+                <div class="nav-right">
+                    <div style="position:relative;">
+                        <button class="nav-icon-btn" title="Notifications" id="btnNotifications">🔔</button>
+                    </div>
+                    <button class="nav-icon-btn" title="Profile" onclick="location.href='/profile.html'">👤</button>
+                    <button class="nav-cta" id="btnLogout">Logout</button>
+                </div>
+            </header>
+
+            <!-- ========== MAIN ========== -->
+            <main class="profile-layout">
+
+                <!-- ===== LEFT SIDEBAR ===== -->
+                <aside class="profile-sidebar">
+                    <section class="profile-card">
+                        <div class="avatar-circle">👤</div>
+                        <h2 class="profile-name" id="profileName">Loading...</h2>
+                        <p class="profile-role" id="profileEmail">Loading...</p>
+                        <div class="profile-chip-row">
+                            <span class="profile-chip">Student</span>
+                            <span class="profile-chip outline">On-campus only</span>
+                        </div>
+                        <div class="profile-divider"></div>
+                        <ul class="profile-contact">
+                            <li>📧 <span id="profileEmailDetail">Loading...</span></li>
+                            <li>👤 <span id="profileUsername">Loading...</span></li>
+                        </ul>
+                        <button class="btn-outline" id="btnEditProfile">✏️ Edit profile</button>
+                        <!-- Şifre değiştir butonu -->
+                        <button class="btn-outline" id="btnChangePassword" style="margin-top: 8px;">🔒 Change password</button>
+                    </section>
+
+                    <!-- ===== STATS ===== -->
+                    <section class="stats-card">
+                        <h3>Quick stats</h3>
+                        <div class="stats-row">
+                            <span>My Books</span>
+                            <span id="statsMyBooks">0</span>
+                        </div>
+                        <div class="stats-row">
+                            <span>Sent Requests</span>
+                            <span id="statsSentRequests">0</span>
+                        </div>
+                        <div class="stats-row">
+                            <span>Received Requests</span>
+                            <span id="statsReceivedRequests">0</span>
+                        </div>
+                    </section>
+                </aside>
+
+                <!-- ===== RIGHT CONTENT ===== -->
+                <section class="profile-content">
+
+                    <div class="content-header">
+                        <div>
+                            <h1>My profile</h1>
+                            <p>Manage your campus book sharing account and activity.</p>
+                        </div>
+
+                    </div>
+
+                    <!-- VIEW PANEL -->
+                    <div class="card panel" id="viewPanel">
+                        <div class="tabs-toggle">
+                            <button class="tab-button active" data-tab="mybooks">My Books</button>
+                            <button class="tab-button" data-tab="sent">Sent Requests</button>
+                            <button class="tab-button" data-tab="received">Received Requests</button>
+                        </div>
+                        <div class="tab-content active" id="tab-mybooks">
+                            <div id="myBooksContainer"></div>
+                        </div>
+                        <div class="tab-content" id="tab-sent">
+                            <div id="sentRequestsContainer"></div>
+                        </div>
+                        <div class="tab-content" id="tab-received">
+                            <div id="receivedRequestsContainer"></div>
+                        </div>
+                    </div>
+
+                    <!-- EDIT PANEL -->
+                    <div class="card panel edit" id="editPanel">
+                        <h2>Edit profile</h2>
+                        <p class="edit-subtitle">Update your account information.</p>
+                        <form id="editForm" class="edit-form">
+                            <div class="form-grid">
+                                <div class="form-group full">
+                                    <label>Full Name</label>
+                                    <input type="text" id="fullName" required />
+                                </div>
+                                <div class="form-group full">
+                                    <label>Email</label>
+                                    <input type="email" id="email" required />
+                                </div>
+                                <div class="form-group full">
+                                    <label>Username</label>
+                                    <input type="text" id="username" disabled />
+                                </div>
+                            </div>
+                            <div class="edit-actions">
+                                <button type="submit" class="btn-primary">💾 Save changes</button>
+                                <button type="button" class="btn-secondary" id="btnCancelEdit">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- ŞİFRE DEĞİŞTİR PANEL -->
+                    <div class="card panel edit" id="changePasswordPanel">
+                        <h2>Change password</h2>
+                        <p class="edit-subtitle">Update your password to keep your account secure.</p>
+                        <form id="changePasswordForm" class="edit-form">
+                            <div class="form-grid">
+                                <div class="form-group full">
+                                    <label>Current Password</label>
+                                    <input type="password" id="currentPassword" placeholder="Enter current password" required />
+                                </div>
+                                <div class="form-group full">
+                                    <label>New Password</label>
+                                    <input type="password" id="newPassword" placeholder="At least 6 characters" required />
+                                </div>
+                                <div class="form-group full">
+                                    <label>Confirm New Password</label>
+                                    <input type="password" id="confirmNewPassword" placeholder="Repeat new password" required />
+                                </div>
+                            </div>
+                            <div id="passwordError" class="password-error" style="display:none;"></div>
+                            <div class="edit-actions">
+                                <button type="submit" class="btn-primary">🔒 Update password</button>
+                                <button type="button" class="btn-secondary" id="btnCancelPassword">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="/js/notifications.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/profile.js"></script>
+</body>
+</html>

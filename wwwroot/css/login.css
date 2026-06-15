@@ -1,0 +1,211 @@
+/* =======================
+   GLOBAL RESET
+======================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+/* =======================
+   ARKA PLAN CANVAS
+======================= */
+#bgCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(circle at top left, #162447 0, #0b1020 50%, #05060a 100%);
+}
+
+/* =======================
+   KART
+======================= */
+.container {
+    width: 420px;
+    background: rgba(8, 13, 30, 0.96);
+    padding: 40px 35px 45px;
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contact-form {
+    text-align: center;
+}
+
+/* =======================
+   USER BADGE (LOGO YERİNE)
+======================= */
+.user-img {
+    width: 120px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 20px;
+
+    /* Neon gradient çerçeve */
+    padding: 4px;
+    background: linear-gradient(135deg, #00aaff, #7b2ff7);
+
+    /* Mask */
+    -webkit-mask: radial-gradient(circle, #000 60%, transparent 61%);
+    mask: radial-gradient(circle, #000 60%, transparent 61%);
+
+    /* Glow efekti */
+    box-shadow:
+        0 0 15px rgba(0, 170, 255, 0.6),
+        0 0 25px rgba(123, 47, 247, 0.4);
+}
+
+.user-badge::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border-radius: 50%;
+    background: radial-gradient(circle at top, #141c3c, #050814);
+}
+
+.user-badge span {
+    position: relative;
+    color: #f5f7ff;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+/* =======================
+   BAŞLIK
+======================= */
+.contact-form h2 {
+    font-size: 26px;
+    margin-bottom: 18px;
+    color: #f4f4f4;
+    letter-spacing: 1px;
+}
+
+/* =======================
+   TAB BUTONLARI
+======================= */
+.tab-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+    justify-content: center;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 8px 0;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(15, 22, 50, 0.95);
+    color: #cfd8ff;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.tab-btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.tab-btn.active {
+    background: linear-gradient(120deg, #0ea5e9, #22c55e);
+    box-shadow: 0 10px 28px rgba(16, 185, 129, 0.6);
+    color: #fff;
+    border-color: transparent;
+
+}
+
+/* =======================
+   FORMLAR GÖRÜNÜRLÜK
+======================= */
+.form {
+    display: none;
+}
+
+.form.active {
+    display: block;
+}
+
+/* =======================
+   INPUT ALANLARI
+======================= */
+.txtb {
+    margin: 14px 0;
+}
+
+.txtb input {
+    font-size: 15px;
+    color: #eee;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px 12px;
+    height: 44px;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+}
+
+.txtb input::placeholder {
+    color: #8ea0c9;
+}
+
+.txtb input:focus {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: #4d7cff;
+    box-shadow: 0 0 0 2px rgba(77, 124, 255, 0.35);
+}
+
+/* =======================
+   BUTON
+======================= */
+.logbtn {
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 10px;
+
+   background: linear-gradient(120deg, #0ea5e9, #22c55e);
+    background-size: 200% 200%;
+
+    color: #ffffff;
+
+    box-shadow: 0 10px 28px rgba(16, 185, 129, 0.6);
+    transition:
+        background-position 0.6s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    margin-top: 12px;
+}
+
+.logbtn:hover {
+    background-position: right center;
+    transform: translateY(-2px);
+    box-shadow:
+        0 0 20px rgba(77, 124, 255, 0.7),
+        0 0 35px rgba(0, 0, 0, 0.8);
+}
+
+.logbtn:active {
+    transform: scale(0.97);
+    box-shadow:
+        0 0 10px rgba(77, 124, 255, 0.35),
+        0 0 18px rgba(0, 0, 0, 0.5);
+}

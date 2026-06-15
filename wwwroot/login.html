@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Panel - Book Exchange</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+    <!-- ARKA PLAN CANVAS -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- USER LOGIN / SIGN IN KARTI -->
+    <div class="container">
+        <div class="contact-form">
+
+            <img src="images/ChatGPT Image 26 Kas 2025 13_21_53.png" class="user-img" alt="User Avatar">
+
+            <h2 id="formTitle">User Sign In</h2>
+
+            <!-- TAB BUTTONS -->
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-target="signInForm">User Sign In</button>
+                <button class="tab-btn" data-target="loginForm">User Login</button>
+            </div>
+
+            <!-- SIGN IN FORM (varsayılan) -->
+            <form id="signInForm" class="form active">
+                <div id="registerError" style="display:none; color:#f87171; font-size:13px; margin-bottom:8px;"></div>
+                <div class="txtb">
+                    <input id="registerFullName" type="text" placeholder="Full Name">
+                </div>
+                <div class="txtb">
+                    <input id="registerEmail" type="email" placeholder="Email">
+                </div>
+                <div class="txtb">
+                    <input id="registerUsername" type="text" placeholder="Username">
+                </div>
+                <div class="txtb">
+                    <input id="registerPassword" type="password" placeholder="Password">
+                </div>
+                <div class="txtb">
+                    <input id="registerConfirmPassword" type="password" placeholder="Confirm Password">
+                </div>
+                <input type="submit" class="logbtn" value="Sign In">
+            </form>
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm" class="form">
+                <div id="loginError" style="display:none; color:#f87171; font-size:13px; margin-bottom:8px;"></div>
+                <div class="txtb">
+                    <input id="loginUsername" type="text" placeholder="Username">
+                </div>
+                <div class="txtb">
+                    <input id="loginPassword" type="password" placeholder="Password">
+                </div>
+                <input type="submit" class="logbtn" value="Login">
+            </form>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="js/auth.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>
